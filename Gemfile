@@ -16,7 +16,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 gem "autoprefixer-rails"
 gem 'devise', '~> 3.5', '>= 3.5.6'
-gem 'devise-bootstrapped', '~> 0.1.1'
 
 group :development, :test do
   gem 'byebug'
