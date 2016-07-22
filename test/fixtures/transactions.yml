@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  num_of_shares: 1
+  price: 1.5
+  portfolio_id: 
+
+two:
+  type: 
+  num_of_shares: 1
+  price: 1.5
+  portfolio_id: 
