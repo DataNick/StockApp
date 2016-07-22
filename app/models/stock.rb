@@ -1,3 +1,3 @@
 class Stock < ActiveRecord::Base
-  belongs_to :portfolio
+  has_many :transactions
 end
