@@ -22,6 +22,12 @@ group :development, :test do
   gem "better_errors"
 end
 
+group :test do
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+  gem 'minitest-rails', '~> 2.2', '>= 2.2.1'
+  gem 'vcr', '~> 3.0', '>= 3.0.3'
+end
+
 group :development do
   gem 'web-console', '~> 2.0'
 
