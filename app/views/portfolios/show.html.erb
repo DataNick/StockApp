@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @portfolio.name %>
@@ -7,8 +5,10 @@
 
 <p>
   <strong>Amount:</strong>
-  <%= @portfolio.amount %>
+  <%= number_to_currency(@portfolio.amount) %>
 </p>
+<br/>
+<%= render 'stock' %>
 
 <%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
 <%= link_to 'Back', portfolios_path %>
