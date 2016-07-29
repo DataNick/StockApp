@@ -18,6 +18,10 @@ class StocksController < ApplicationController
   def show
   end
 
+  def new
+    @stock = Stock.new
+  end
+
   private
 
   # def set_stock
