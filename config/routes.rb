@@ -1,17 +1,11 @@
 Rails.application.routes.draw do
 
 
-  get 'transactions/new'
-
-  get 'transactions/create'
-
-  get 'transactions/update'
-
-  get 'transactions/show'
-
   devise_for :users
   resources :portfolios  do
-    resources :stocks, only: [:create, :update, :show, :destroy]
+    resources :stocks, only: [:new, :create, :update, :show, :destroy] do
+      resources :transactions, only: [:new, :create, :update, :show]
+    end
   end
   root "portfolios#index"
   # The priority is based upon order of creation: first created -> highest priority.
