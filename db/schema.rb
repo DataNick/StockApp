@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730202930) do
+ActiveRecord::Schema.define(version: 20160730211047) do
 
   create_table "portfolios", force: :cascade do |t|
     t.string   "name"
-    t.float    "amount"
+    t.decimal  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160730202930) do
     t.string   "symbol"
     t.string   "name"
     t.string   "stock_exchange"
-    t.float    "last_price"
+    t.decimal  "last_price"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
