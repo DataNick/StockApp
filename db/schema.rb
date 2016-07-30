@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722223124) do
+ActiveRecord::Schema.define(version: 20160730201603) do
 
   create_table "portfolios", force: :cascade do |t|
     t.string   "name"
@@ -33,13 +33,15 @@ ActiveRecord::Schema.define(version: 20160722223124) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string   "type"
     t.integer  "num_of_shares"
-    t.float    "price"
     t.integer  "portfolio_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "stock_id"
+    t.datetime "buy_date"
+    t.decimal  "buy_price"
+    t.decimal  "sell_price"
+    t.datetime "sell_date"
   end
 
   add_index "transactions", ["portfolio_id"], name: "index_transactions_on_portfolio_id"
