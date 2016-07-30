@@ -2,7 +2,7 @@ class StocksController < ApplicationController
   # before_action :set_stock, only: [:create, :update, :destroy, :show]
 
   def create
-    portfolio = Portfolio.find(params[:id])
+    portfolio = Portfolio.find(params[:portfolio_id])
     stock = Stock.new(stock_params.merge! portfolio_id: portfolio.id)
 
     if stock.save
