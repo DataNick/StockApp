@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730201603) do
+ActiveRecord::Schema.define(version: 20160730202930) do
 
   create_table "portfolios", force: :cascade do |t|
     t.string   "name"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160730201603) do
     t.integer  "portfolio_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "stock_id"
+    t.string   "stock_id"
     t.datetime "buy_date"
     t.decimal  "buy_price"
     t.decimal  "sell_price"
