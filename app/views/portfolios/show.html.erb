@@ -8,7 +8,26 @@
   <%= number_to_currency(@portfolio.amount) %>
 </p>
 <br/>
-<%= render 'stock' %>
+<table>
+  <thead>
+    <tr>
+      <th>Stock</th>
+      <th>Buy Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<tbody>
+<% @portfolio.transactions.each do |trade| %>
+  <tr>
+    <td><%= trade.stock_id %></td>
+    <td><%= trade.buy_price %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<br/>
+<br/>
+<%= render 'transaction' %>
 
 <%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
 <%= link_to 'Back', portfolios_path %>
