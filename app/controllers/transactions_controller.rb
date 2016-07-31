@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  before_action :load_portfolio
+
   def new
     @transaction = Transaction.new
   end
@@ -8,11 +10,11 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = @portfolio.transactions.build(transaction_params)
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+        format.html { redirect_to @portfolio, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new }
@@ -38,6 +40,10 @@ class TransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:type, :num_of_shares, :price, :portfolio_id, :stock_id)
+    params.require(:transaction).permit(:num_of_shares, :buy_price, :buy_date, :sell_price, :sell_date, :portfolio_id, :stock_id)
+  end
+
+  def load_portfolio
+    @portfolio = Portfolio.find(params[:portfolio_id])
   end
 end
