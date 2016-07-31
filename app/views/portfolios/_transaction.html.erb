@@ -1,0 +1,21 @@
+<%= form_for [@portfolio, Transaction.new] do |f| %>
+  <div class="field">
+    <%= f.label :stock_id %><br>
+    <%= f.text_field :stock_id %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :num_of_shares %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.number_field :buy_price %>
+  </div>
+  <div class="field">
+    <%= f.label :buy_date %><br>
+    <%= f.datetime_field :buy_date, :value => DateTime.now %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>
