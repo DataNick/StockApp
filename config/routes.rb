@@ -2,10 +2,9 @@ Rails.application.routes.draw do
 
 
   devise_for :users
+  resources :stocks, only: [:new, :create, :update, :show, :destroy]
   resources :portfolios  do
-    resources :stocks, only: [:new, :create, :update, :show, :destroy] do
-      resources :transactions, only: [:new, :create, :update, :show]
-    end
+    resources :transactions, only: [:new, :create, :update, :show]
   end
   root "portfolios#index"
   # The priority is based upon order of creation: first created -> highest priority.
