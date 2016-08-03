@@ -1,4 +1,4 @@
-<%= form_for(@transaction) do |f| %>
+<%= form_for([@portfolio, @transaction]) do |f| %>
   <% if @transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :stock_id %><br>
-    <%= f.text_field :stock_id %>
+    <%= f.select :stock_id, options_for_select([["Please select...",""]]+Stock::COMPANIES) %>
   </div>
   <div class="field">
     <%= f.label :quantity %><br>
