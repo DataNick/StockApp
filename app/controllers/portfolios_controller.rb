@@ -10,6 +10,7 @@ class PortfoliosController < ApplicationController
 
   def new
     @portfolio = Portfolio.new
+    1.times {@portfolio.stocks.build}
   end
 
   def edit
