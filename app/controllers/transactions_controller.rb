@@ -11,7 +11,6 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = @portfolio.transactions.build(transaction_params)
-
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @portfolio, notice: 'Transaction was successfully created.' }
