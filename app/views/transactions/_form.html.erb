@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :stock_id %><br>
-    <%= f.select :stock_id, options_for_select([["Please select...",""]]+Stock::COMPANIES) %>
+    <%= f.label :symbol %><br>
+    <%= f.select :stock_id, options_from_collection_for_select(Stock.all, :id, :symbol), prompt: 'Please select a stock...' %>
   </div>
   <div class="field">
     <%= f.label :quantity %><br>
