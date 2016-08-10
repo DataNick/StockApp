@@ -1,18 +1,29 @@
 class StocksController < ApplicationController
-  # before_action :set_stock, only: [:create, :update, :destroy, :show]
+  before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
   def create
-    portfolio = Portfolio.find(params[:portfolio_id])
-    stock = Stock.new(stock_params.merge! portfolio_id: portfolio.id)
+    @stock = Stock.new(stock_params)
 
-    if stock.save
-      redirect_to portfolio, notice: "Stock was added to portfolio."
+    if @stock.save
+      redirect_to @stock, notice: "Stock was created."
     else
-      redirect_to portfolio, alert: "Something went wrong."
+      redirect_to @stock, alert: "Something went wrong."
     end
   end
 
+  def index
+    @stocks = Stock.all
+  end
+
   def update
+  end
+
+  def destroy
+    @stock.destroy
+    respond_to do |format|
+      format.html { redirect_to stocks_url, notice: 'Stock was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def show
@@ -24,11 +35,12 @@ class StocksController < ApplicationController
 
   private
 
-  # def set_stock
-  #   @stock = Stock.find(params[:id])
-  # end
+  def set_stock
+    @stock = Stock.find(params[:id])
+  end
+
 
   def stock_params
-    params.require(:stock).permit(:symbol, :name, :stock_exchange, :last_price)
+    params.require(:stock).permit(:symbol)
   end
 end
