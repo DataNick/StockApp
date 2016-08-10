@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
   devise_for :users
-  resources :stocks, only: [:new, :create, :update, :show, :destroy]
+  resources :stocks
   resources :portfolios  do
     resources :transactions, only: [:new, :create, :update, :show]
   end
