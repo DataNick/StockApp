@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :stocks
+  get 'mass_update' => 'stocks#mass_update'
   resources :portfolios  do
     resources :transactions, only: [:new, :create, :update, :show]
   end
