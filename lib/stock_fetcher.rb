@@ -3,8 +3,8 @@ require 'json'
 class StockFetcher
   attr_reader :stock
 
-  def initialize(symbol_array)
-    @symbols = symbol_array
+  def initialize(symbols)
+    @symbols = symbols
   end
 
   def fetch
@@ -62,9 +62,6 @@ end
 # need to parse the hash from api to just the name, ticker, date, last_price and stock exchange
 
 
-stock = StockFetcher.new(['googl', 'aapl', 'yhoo', 'tsla', 'twtr'])
-# # p stock.fetch['query']['results']['quote']
-p stock.request_api("'aapl', 'twtr', 'fb', 'tsla'")
-# p stock.fetch['query']['results']['quote']["LastTradeWithTime"]
-# StockFetcher.new(Stock.new('GOOGL'))
-# p StockFetcher.new
+# stock = StockFetcher.new(['googl', 'f', 'tsla', 'dis', 'twtr'])
+# puts stock.fetch
+
