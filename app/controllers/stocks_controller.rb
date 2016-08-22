@@ -1,3 +1,5 @@
+# require_relative '../../lib/stock_fetcher.rb'
+
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
@@ -33,7 +35,29 @@ class StocksController < ApplicationController
     @stock = Stock.new
   end
 
+  def mass_update
+    update_quotes
+    respond_to do |format|
+      format.html { redirect_to stocks_url, notice: 'All stocks were updated.'}
+      format.json { head :no_content }
+    end
+  end
+
   private
+
+  def update_quotes(tickers = Stock.all.pluck(:symbol))
+    fetcher = StockFetcher.new(tickers)
+    stock_data = fetcher.fetch
+    stock_data.each do |stock_hash|
+      puts "#{stock_hash[:symbol]}"
+      Stock.find_or_create_by(symbol: stock_hash[:symbol]) do |stock|
+        puts "hello"
+        if Stock.exists?(symbol: stock[:symbol])
+          Stock.update!(stock_hash)
+        end
+      end
+    end
+  end
 
   def set_stock
     @stock = Stock.find(params[:id])
