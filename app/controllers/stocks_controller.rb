@@ -48,13 +48,10 @@ class StocksController < ApplicationController
   def update_quotes(tickers = Stock.all.pluck(:symbol))
     fetcher = StockFetcher.new(tickers)
     stock_data = fetcher.fetch
-    stock_data.each do |stock_hash|
-      puts "#{stock_hash[:symbol]}"
-      Stock.find_or_create_by(symbol: stock_hash[:symbol]) do |stock|
-        puts "hello"
-        if Stock.exists?(symbol: stock[:symbol])
-          Stock.update!(stock_hash)
-        end
+    Stock.transaction do
+      stock_data.each do |stock_hash|
+        stock = Stock.find_by(symbol: stock_hash[:symbol])
+        stock.update!(stock_hash)
       end
     end
   end
