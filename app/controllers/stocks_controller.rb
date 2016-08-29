@@ -5,16 +5,19 @@ class StocksController < ApplicationController
 
   def create
     @stock = Stock.new(stock_params)
-
-    if @stock.save
-      redirect_to @stock, notice: "Stock was created."
-    else
-      redirect_to @stock, alert: "Something went wrong."
+    respond_to do |format|
+      if @stock.save
+        redirect_to stocks_url, notice: "Stock was created."
+      else
+        format.html { render :new }
+        format.json { render json: @stock.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def index
-    @stocks = Stock.all
+    # @stocks = Stock.all
+    @stocks = Stock.search(params[:search])
   end
 
   def update
@@ -48,12 +51,7 @@ class StocksController < ApplicationController
   def update_quotes(tickers = Stock.all.pluck(:symbol))
     fetcher = StockFetcher.new(tickers)
     stock_data = fetcher.fetch
-    Stock.transaction do
-      stock_data.each do |stock_hash|
-        stock = Stock.find_by(symbol: stock_hash[:symbol])
-        stock.update!(stock_hash)
-      end
-    end
+    Stock.update_all_stocks(stock_data)
   end
 
   def set_stock
