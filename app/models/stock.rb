@@ -3,7 +3,15 @@ class Stock < ActiveRecord::Base
   # has_many :portfolios, through: :transactions
   # attr_accessor :stock
   validates :symbol, uniqueness: true, length: { minimum: 1 }
+  before_save { self.symbol = symbol.upcase }
 
+  def self.search(search)
+    if search
+      self.where("symbol LIKE ?", "#{search}")
+    else
+      self.all
+    end
+  end
 
   def fetch_stock(symbol)
     symbol = symbol.inspect.upcase
@@ -14,22 +22,11 @@ class Stock < ActiveRecord::Base
     stock_hash = JSON.parse(data)
   end
 
-  def self.insert_or_update(stock_hash)
-  end
-
-  private
-
-  def update_or_create(stock, stock_hash)
-    if stock
+  def self.update_all_stocks(stock_data)
+    stock_data.each do |stock_hash|
+      stock = Stock.find_by(symbol: stock_hash[:symbol])
       stock.update!(stock_hash)
-    else
-      Stock.create!(stock_hash)
     end
   end
 
-  def persist
-
-  end
-
-  # Stock.find_or_create_by(symbol: ticker)
 end
