@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :stocks
   get 'mass_update' => 'stocks#mass_update'
   resources :portfolios  do
+    get 'update_amount' => 'portfolios#update_amount'
     resources :transactions, only: [:new, :create, :update, :show]
   end
   root "portfolios#index"

@@ -1,11 +1,13 @@
 class PortfoliosController < ApplicationController
-  before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
+  before_action :set_portfolio, only: [:edit, :update, :destroy]
 
   def index
     @portfolios = Portfolio.all
   end
 
   def show
+    @portfolio = Portfolio.includes(:transactions, :stocks).find(params[:id])
+    @transaction = Transaction.new
   end
 
   def new
@@ -25,6 +27,19 @@ class PortfoliosController < ApplicationController
         format.json { render :show, status: :created, location: @portfolio }
       else
         format.html { render :new }
+        format.json { render json: @portfolio.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_amount
+    @portfolio = Portfolio.find(params[:portfolio_id])
+    respond_to do |format|
+      if @portfolio.update_attribute(:amount, @portfolio.transactions.map{|trans| trans.stock.last_price * trans.num_of_shares }.inject(:+))
+        format.html { redirect_to @portfolio, notice: 'Portfolio amount was successfully updated.' }
+        format.json { render :show, status: :ok, location: @portfolio }
+      else
+        format.html { render :edit }
         format.json { render json: @portfolio.errors, status: :unprocessable_entity }
       end
     end
