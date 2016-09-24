@@ -7,6 +7,7 @@ class StocksController < ApplicationController
     @stock = Stock.new(stock_params)
     respond_to do |format|
       if @stock.save
+        mass_update
         redirect_to stocks_url, notice: "Stock was created."
       else
         format.html { render :new }

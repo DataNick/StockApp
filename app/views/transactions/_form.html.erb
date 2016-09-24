@@ -12,20 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :symbol %><br>
+    <%= f.label :symbol, 'Ticker' %><br>
     <%= f.select :stock_id, options_from_collection_for_select(Stock.all, :id, :symbol), prompt: 'Please select a stock...' %>
   </div>
   <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.number_field :num_of_shares %>
+    <%= f.label :num_of_shares, 'Quantity' %><br>
+    <%= f.number_field :num_of_shares, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :price %><br>
-    <%= f.number_field :buy_price %>
+    <%= f.label :buy_price %><br>
+    <%= f.number_field :buy_price, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :buy_date %><br>
-    <%= f.datetime_field :buy_date, :value => DateTime.now %>
+    <%= f.datetime_field :buy_date, :value => DateTime.now, class: 'form-control' %>
   </div>
 
   <div class="actions">
