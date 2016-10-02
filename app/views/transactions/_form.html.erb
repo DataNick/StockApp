@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= f.label :symbol, 'Ticker' %><br>
-    <%= f.select :stock_id, options_from_collection_for_select(Stock.all, :id, :symbol), prompt: 'Please select a stock...' %>
+    <%= f.select :stock_id, options_from_collection_for_select(Stock.order(symbol: :asc), :id, :symbol), prompt: 'Please select a stock...' %>
   </div>
   <div class="field">
     <%= f.label :num_of_shares, 'Quantity' %><br>
