@@ -33,7 +33,7 @@ class PortfoliosController < ApplicationController
   end
 
   def update_amount
-    @portfolio = Portfolio.find(params[:portfolio_id])
+    @portfolio = Portfolio.includes(:transactions, :stocks).find(params[:portfolio_id])
     respond_to do |format|
       if @portfolio.update_attribute(:amount, @portfolio.transactions.map{|trans| trans.stock.last_price * trans.num_of_shares }.inject(:+))
         format.html { redirect_to @portfolio, notice: 'Portfolio amount was successfully updated.' }
