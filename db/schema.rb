@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809022238) do
+ActiveRecord::Schema.define(version: 20161001220521) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "portfolios", force: :cascade do |t|
     t.string   "name"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160809022238) do
     t.integer  "user_id"
   end
 
-  add_index "portfolios", ["user_id"], name: "index_portfolios_on_user_id"
+  add_index "portfolios", ["user_id"], name: "index_portfolios_on_user_id", using: :btree
 
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
@@ -42,10 +45,11 @@ ActiveRecord::Schema.define(version: 20160809022238) do
     t.decimal  "buy_price"
     t.decimal  "sell_price"
     t.datetime "sell_date"
+    t.string   "buy_sell"
   end
 
-  add_index "transactions", ["portfolio_id"], name: "index_transactions_on_portfolio_id"
-  add_index "transactions", ["stock_id"], name: "index_transactions_on_stock_id"
+  add_index "transactions", ["portfolio_id"], name: "index_transactions_on_portfolio_id", using: :btree
+  add_index "transactions", ["stock_id"], name: "index_transactions_on_stock_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -63,7 +67,7 @@ ActiveRecord::Schema.define(version: 20160809022238) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
