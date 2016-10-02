@@ -11,6 +11,9 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = @portfolio.transactions.build(transaction_params)
+    if params[:transaction][:buy_sell] == 'buy'
+      buy
+    end
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @portfolio, notice: 'Transaction was successfully created.' }
@@ -34,15 +37,33 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def destroy
+    @transaction = @portfolio.transaction.find(params[:id])
+    @transaction.destroy
+  end
+
   def show
   end
 
   private
   def transaction_params
-    params.require(:transaction).permit(:num_of_shares, :buy_price, :buy_date, :sell_price, :sell_date, :portfolio_id, :stock_id)
+    params.require(:transaction).permit(:num_of_shares, :buy_price, :buy_date, :sell_price, :sell_date, :buy_sell, :portfolio_id, :stock_id)
   end
 
   def load_portfolio
     @portfolio = Portfolio.find(params[:portfolio_id])
+  end
+
+  def buy
+    stock = Stock.find(@transaction.stock_id)
+    @transaction.buy_price = stock.last_price
+    @transaction.buy_date = DateTime.now
+  end
+
+  def sell
+  end
+
+  def stock_included
+
   end
 end
