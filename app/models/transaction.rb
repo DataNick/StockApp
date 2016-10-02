@@ -7,7 +7,11 @@ class Transaction < ActiveRecord::Base
   TYPES = ["buy", "sell"]
 
   def sell(quantity)
-    self.num_of_shares =- quantity
+    if quantity > num_of_shares
+      notice: "The quantity exceeds number of shares owned."
+    else
+      self.num_of_shares =- quantity
+    end
   end
 
   def investment
@@ -21,8 +25,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def weighted_average
-     #(first gain * (investment / total investment)) + (second gain *(investment / total investment)) + (third gain * (investment / total investment))
-     (gain_loss * (investment / @portfolio.investment))
+     (gain_loss * (investment / @portfolio.total_investment))
   end
 
 end

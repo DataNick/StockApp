@@ -25,23 +25,10 @@ class Portfolio < ActiveRecord::Base
     total
   end
 
-  def weighted_average
+  def total_weighted_average
     total = 0.0
     transactions.each{ |trade| total += trade.weighted_average }
     total
   end
-
-  #Average gain/loss
-  #annualized returns?
-  #Investment = number of shares * buy price
-  #@portfolio.transactions.average(:gain/loss) => average
-  #want to get weighted average - different portion of investment in some versus others
-    #(first gain * (investment / total investment)) + (second gain *(investment / total investment)) + (third gain * (investment / total investment))
-
-#     Portfolio weight - % composition of a particular holding in a portfolio.
-# Different approaches to calculating weight.
-# 1. Divide the dollar value of a security by the total dollar value of the portfolio
-# 2. Divide the number of units of a given security by the total number of shares held in the portfolio
-# 3. Market value of stock position = multiply the share price by the number of shares outstanding
 
 end
