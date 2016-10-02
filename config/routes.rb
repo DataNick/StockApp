@@ -3,10 +3,10 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :stocks
-  get 'mass_update' => 'stocks#mass_update'
+  patch 'mass_update' => 'stocks#mass_update'
   resources :portfolios  do
-    get 'update_amount' => 'portfolios#update_amount'
-    resources :transactions, only: [:new, :create, :update, :show]
+    patch 'update_amount' => 'portfolios#update_amount'
+    resources :transactions, only: [:new, :create, :update, :show, :destroy]
   end
   root "portfolios#index"
   # The priority is based upon order of creation: first created -> highest priority.
