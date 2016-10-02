@@ -13,6 +13,8 @@ class TransactionsController < ApplicationController
     @transaction = @portfolio.transactions.build(transaction_params)
     if params[:transaction][:buy_sell] == 'buy'
       buy
+    elsif params[:transaction][:buy_sell] == 'sell'
+      sell
     end
     respond_to do |format|
       if @transaction.save
@@ -61,6 +63,8 @@ class TransactionsController < ApplicationController
   end
 
   def sell
+    stock = Stock.find(params[:transaction][:stock_id])
+    @transaction.find
   end
 
   def stock_included
