@@ -10,7 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'pg', '~> 0.18.4'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'ember-rails'
+gem 'react-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 

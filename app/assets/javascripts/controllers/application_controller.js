@@ -1,1 +1,0 @@
-Stockapp.ApplicationController = Ember.Controller.extend()
