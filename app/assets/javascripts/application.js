@@ -25,4 +25,4 @@
 
 // for more details see: http://emberjs.com/guides/application/
 Stockapp = Ember.Application.create();
-//= require_tree .
+

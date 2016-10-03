@@ -6,13 +6,13 @@ class Transaction < ActiveRecord::Base
 
   TYPES = ["buy", "sell"]
 
-  def sell(quantity)
-    if quantity > num_of_shares
-      notice: "The quantity exceeds number of shares owned."
-    else
-      self.num_of_shares =- quantity
-    end
-  end
+  # def sell(quantity)
+  #   if quantity > num_of_shares
+  #     notice: "The quantity exceeds number of shares owned."
+  #   else
+  #     self.num_of_shares =- quantity
+  #   end
+  # end
 
   def investment
     if buy_price
