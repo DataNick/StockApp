@@ -20,9 +20,11 @@ class TransactionsController < ApplicationController
       if @transaction.save
         format.html { redirect_to @portfolio, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

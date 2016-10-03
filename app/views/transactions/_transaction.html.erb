@@ -1,0 +1,10 @@
+<tr>
+  <td class="col-md-1"><%= transaction.stock.symbol %></td>
+  <td class="col-md-1"><%= number_to_currency(transaction.stock.last_price) %></td>
+  <td class="col-md-1"><%= transaction.stock.name %></td>
+  <td class="col-md-1"><%= transaction.stock.stock_exchange %></td>
+  <td class="col-md-1"><%= transaction.num_of_shares %></td>
+  <td class="col-md-1"><%= number_to_currency(transaction.buy_price) %></td>
+  <td class="col-md-1"><%= number_to_currency(transaction.stock.last_price.to_f - transaction.buy_price.to_f) %></td>
+  <td class="col-md-1"><%= link_to 'Sell', portfolio_transaction_path(@portfolio, transaction), method: :delete, class: "btn btn-success" %></td>
+</tr>

@@ -32,19 +32,8 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-<tbody>
-<% @portfolio.transactions.each do |trans| %>
-  <tr>
-    <td class="col-md-1"><%= trans.stock.symbol %></td>
-    <td class="col-md-1"><%= number_to_currency(trans.stock.last_price) %></td>
-    <td class="col-md-1"><%= trans.stock.name %></td>
-    <td class="col-md-1"><%= trans.stock.stock_exchange %></td>
-    <td class="col-md-1"><%= trans.num_of_shares %></td>
-    <td class="col-md-1"><%= number_to_currency(trans.buy_price) %></td>
-    <td class="col-md-1"><%= number_to_currency(trans.stock.last_price.to_f - trans.buy_price.to_f) %></td>
-    <td class="col-md-1"><%= link_to 'Sell', portfolio_transaction_path(@portfolio, trans), method: :delete, class: "btn btn-success" %></td>
-  </tr>
-<% end %>
+<tbody id = "transactions">
+  <%= render @transactions %>
 </tbody>
 </table>
 <%= link_to 'Update Stocks', mass_update_path, method: :patch, class: "btn btn-primary" %>

@@ -7,6 +7,7 @@ class PortfoliosController < ApplicationController
 
   def show
     @portfolio = Portfolio.includes(:transactions, :stocks).find(params[:id])
+    @transactions = @portfolio.transactions
     @transaction = Transaction.new
   end
 
