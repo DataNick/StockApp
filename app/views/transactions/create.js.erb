@@ -1,1 +1,8 @@
-$("#transactions").append("<%= escape_javascript(render @transaction) %>");
+<% if @transaction.errors.any? %>
+  $('#transaction-errors').html("<%= j(render partial: 'transaction_form_errors') %>")
+<% else %>
+  $("#transactions").append("<%= escape_javascript(render @transaction) %>");
+  $('#transaction_num_of_shares').val('');
+  $('#transaction_stock_id').val('');
+  $('#transaction_buy_sell').val('buy');
+<% end %>
