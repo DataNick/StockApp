@@ -1,6 +1,7 @@
 class Transaction < ActiveRecord::Base
   belongs_to :portfolio
   belongs_to :stock
+  has_many :movements
   validates :stock_id, presence: true
   validates :num_of_shares, presence: true
 

@@ -18,6 +18,7 @@
 
 <br/>
 <h1>Trades</h1>
+<div class = 'table'>
 <table>
   <thead>
     <tr>
@@ -36,6 +37,7 @@
   <%= render @transactions %>
 </tbody>
 </table>
+</div>
 <%= link_to 'Update Stocks', mass_update_path, method: :patch, class: "btn btn-primary" %>
 <br/>
 <h3>Make a Trade</h3>

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  root 'welcome#index'
+
   devise_for :users
   resources :stocks
   patch 'mass_update' => 'stocks#mass_update'
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
     patch 'update_amount' => 'portfolios#update_amount'
     resources :transactions, only: [:new, :create, :update, :show, :destroy]
   end
-  root "portfolios#index"
+  # root "portfolios#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
