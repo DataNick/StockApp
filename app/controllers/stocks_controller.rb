@@ -1,5 +1,3 @@
-# require_relative '../../lib/stock_fetcher.rb'
-
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
@@ -17,7 +15,7 @@ class StocksController < ApplicationController
   end
 
   def index
-    # @stocks = Stock.all
+    @stock = Stock.new
     @stocks = Stock.search(params[:search])
   end
 

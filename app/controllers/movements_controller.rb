@@ -2,6 +2,7 @@ class MovementsController < ApplicationController
   before_action :set_transaction
 
   def index
+    @movements = @transaction.movements.find.all
   end
 
   def create

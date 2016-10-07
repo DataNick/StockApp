@@ -69,7 +69,4 @@ class TransactionsController < ApplicationController
     @transaction.find
   end
 
-  def stock_included
-
-  end
 end
