@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     patch 'update_amount' => 'portfolios#update_amount'
     resources :transactions, only: [:new, :create, :update, :show, :destroy]
   end
+
+  resources :transactions do
+    resources :movements, only: [:create, :destroy]
+  end
   # root "portfolios#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
