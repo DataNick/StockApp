@@ -33,7 +33,7 @@
   </tbody>
 </table>
 
-<%= react_component 'Stocks', { data: @stocks } %>
+<%= render 'form' %>
 <br>
 <%= link_to 'Update Stocks', mass_update_path, method: :patch, class: "btn btn-primary" %>
 <%= link_to 'New Stock', new_stock_path %>
